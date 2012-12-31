@@ -1,0 +1,34 @@
+#!/bin/sh
+#######################################################
+#
+# Description:
+#   Store the temperature value to the database
+# Last modified: 2012-12-31
+#
+#######################################################
+
+VALUE=$1 # Have possibility to import the value as an argument
+SQLITE="`which sqlite3`"
+DIR="${0%/*}"
+DSN="$DIR/temperature.db"
+GET_TEMP=$DIR/w1-temp
+
+if [ -z "$SQLITE" ]; then
+    echo "SQLite not found. Exiting"
+    exit 1
+fi
+if [ ! -f $DSN ]; then
+    echo "Database does not exist. Creating it."
+    $SQLITE $DSN "create table temperatures(value number)"
+fi
+
+if [ -z "$VALUE" ]; then
+    VALUE=`$GET_TEMP`
+fi
+
+$SQLITE $DSN "insert into temperatures values($VALUE)"
+
+$SQLITE $DSN "select * from temperatures"
+
+echo $VALUE
+exit 0
