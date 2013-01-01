@@ -30,7 +30,7 @@ fi
 $SQLITE $DSN "INSERT INTO temperatures(temp_id, location, value, created) \
     VALUES (NULL, NULL, $VALUE, datetime('now','localtime'))"
 
-$SQLITE $DSN "select * from temperatures"
+#$SQLITE $DSN "select * from temperatures"
+#echo $VALUE
 
-echo $VALUE
 exit 0
