@@ -19,14 +19,16 @@ if [ -z "$SQLITE" ]; then
 fi
 if [ ! -f $DSN ]; then
     echo "Database does not exist. Creating it."
-    $SQLITE $DSN "create table temperatures(value number)"
+    $SQLITE $DSN "CREATE TABLE temperatures(temp_id INTEGER PRIMARY KEY NOT NULL, location VARCHAR(50), value FLOAT NOT NULL, created DATETIME NOT NULL)"
+    $SQLITE $DSN "CREATE INDEX idx1_temperatures ON temperatures (created)"
 fi
 
 if [ -z "$VALUE" ]; then
     VALUE=`$GET_TEMP`
 fi
 
-$SQLITE $DSN "insert into temperatures values($VALUE)"
+$SQLITE $DSN "INSERT INTO temperatures(temp_id, location, value, created) \
+    VALUES (NULL, NULL, $VALUE, datetime('now','localtime'))"
 
 $SQLITE $DSN "select * from temperatures"
 
