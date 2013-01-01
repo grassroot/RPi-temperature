@@ -5,6 +5,7 @@ Scripts related to Raspberry Pi temperature logger project for reading temperatu
 
 __w1-temp__:
   - reads a value from the sensor and outputs it to STDOUT
+
 __w1-store-temp__:
   - Creates a new SQLite database if it does not already exist
   - Inserts the value to the database
