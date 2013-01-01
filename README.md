@@ -10,4 +10,4 @@ __w1-store-temp__:
   - Creates a new SQLite database if it does not already exist
   - Inserts the value to the database
 
-Read more about how these were used from here: <http://humbletux.blogspot.com/2012/12/yet-another-raspberry-pi-temperature.html>.
+Read more about how these were used from [here](http://humbletux.blogspot.com/2012/12/yet-another-raspberry-pi-temperature.html).
