@@ -45,10 +45,10 @@ CURRENT_LOCATION=`$SQLITE $DSN "select value from parameters where name = 'CURRE
 $SQLITE $DSN "INSERT INTO temperatures(temp_id, location_id, value, created) \
     VALUES (NULL, $CURRENT_LOCATION, $VALUE, datetime('now','localtime'))"
 
-$SQLITE $DSN "select l.location, t.value, t.created 
-    from temperatures t, locations l 
-    where t.location_id = l.location_id 
-    order by t.created desc 
-    limit 10"
+#$SQLITE $DSN "select l.location, t.value, t.created 
+#    from temperatures t, locations l 
+#    where t.location_id = l.location_id 
+#    order by t.created desc 
+#    limit 10"
 
 exit 0
