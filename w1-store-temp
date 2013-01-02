@@ -41,10 +41,14 @@ if [ -z "$VALUE" ]; then
     VALUE=`$GET_TEMP`
 fi
 
+CURRENT_LOCATION=`$SQLITE $DSN "select value from parameters where name = 'CURRENT_LOCATION'"`
 $SQLITE $DSN "INSERT INTO temperatures(temp_id, location_id, value, created) \
-    VALUES (NULL, NULL, $VALUE, datetime('now','localtime'))"
+    VALUES (NULL, $CURRENT_LOCATION, $VALUE, datetime('now','localtime'))"
 
-#$SQLITE $DSN "select * from temperatures"
-#echo $VALUE
+$SQLITE $DSN "select l.location, t.value, t.created 
+    from temperatures t, locations l 
+    where t.location_id = l.location_id 
+    order by t.created desc 
+    limit 10"
 
 exit 0
