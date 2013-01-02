@@ -21,13 +21,16 @@ if [ ! -f $DSN ]; then
     echo "Database does not exist. Creating it."
     echo "
         PRAGMA foreign_keys = ON;
+        CREATE TABLE parameters(
+          name TEXT,
+          value TEXT);
         CREATE TABLE locations(
           location_id INTEGER PRIMARY KEY NOT NULL,
-          location VARCHAR(50));
+          location TEXT);
         CREATE TABLE temperatures(
           temp_id INTEGER PRIMARY KEY NOT NULL,
-          location_id integer,
-          value FLOAT NOT NULL,
+          location_id INTEGER,
+          value REAL NOT NULL,
           created DATETIME NOT NULL,
           FOREIGN KEY(location_id) REFERENCES locations(location_id));
         CREATE INDEX idx1_temperatures ON temperatures (created);
