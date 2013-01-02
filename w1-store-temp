@@ -32,8 +32,6 @@ if [ ! -f $DSN ]; then
           FOREIGN KEY(location_id) REFERENCES locations(location_id));
         CREATE INDEX idx1_temperatures ON temperatures (created);
         " | $SQLITE $DSN
-#    $SQLITE $DSN "CREATE TABLE temperatures(temp_id INTEGER PRIMARY KEY NOT NULL, location VARCHAR(50), value FLOAT NOT NULL, created DATETIME NOT NULL)"
-#    $SQLITE $DSN "CREATE INDEX idx1_temperatures ON temperatures (created)"
 fi
 
 if [ -z "$VALUE" ]; then
