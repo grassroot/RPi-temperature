@@ -22,19 +22,20 @@ if [ ! -f $DSN ]; then
     echo "Database does not exist. Creating it."
     echo "
         PRAGMA foreign_keys = ON;
-        CREATE TABLE parameters(
+        CREATE TABLE parameter(
+          id INTEGER PRIMARY KEY NOT NULL,
           name TEXT,
           value TEXT);
-        CREATE TABLE locations(
-          location_id INTEGER PRIMARY KEY NOT NULL,
+        CREATE TABLE location(
+          id INTEGER PRIMARY KEY NOT NULL,
           location TEXT);
-        CREATE TABLE temperatures(
-          temp_id INTEGER PRIMARY KEY NOT NULL,
-          location_id INTEGER,
+        CREATE TABLE temperature(
+          id INTEGER PRIMARY KEY NOT NULL,
+          locationId INTEGER,
           value REAL NOT NULL,
-          created DATETIME NOT NULL,
-          FOREIGN KEY(location_id) REFERENCES locations(location_id));
-        CREATE INDEX idx1_temperatures ON temperatures (created);
+          createDate DATETIME NOT NULL,
+          FOREIGN KEY(locationId) REFERENCES location(id));
+        CREATE INDEX idx1_temperature ON temperature (createDate);
         " | $SQLITE $DSN
 fi
 
@@ -42,16 +43,16 @@ fi
 [ -z "$VALUE" ] && VALUE=`$GET_TEMP`
 
 #Fetch the current location from parameters
-CURRENT_LOCATION=`$SQLITE $DSN "select value from parameters where name = 'CURRENT_LOCATION'"`
+CURRENT_LOCATION=`$SQLITE $DSN "select value from parameter where name = 'CURRENT_LOCATION'"`
 # Insert 
-$SQLITE $DSN "INSERT INTO temperatures(temp_id, location_id, value, created) \
+$SQLITE $DSN "INSERT INTO temperature(id, locationiId, value, createDate) \
     VALUES (NULL, $CURRENT_LOCATION, $VALUE, datetime('now','localtime'))"
 
 # Debug query for last values
-#$SQLITE $DSN "select l.location, t.value, t.created 
-#    from temperatures t, locations l 
-#    where t.location_id = l.location_id 
-#    order by t.created desc 
+#$SQLITE $DSN "select l.location, t.value, t.createDate
+#    from temperature t, location l 
+#    where t.locationId = l.Id
+#    order by t.createDate desc 
 #    limit 10"
 
 exit 0
