@@ -45,7 +45,7 @@ fi
 #Fetch the current location from parameters
 CURRENT_LOCATION=`$SQLITE $DSN "select value from parameter where name = 'CURRENT_LOCATION'"`
 # Insert 
-$SQLITE $DSN "INSERT INTO temperature(id, locationiId, value, createDate) \
+$SQLITE $DSN "INSERT INTO temperature(id, locationId, value, createDate) \
     VALUES (NULL, $CURRENT_LOCATION, $VALUE, datetime('now','localtime'))"
 
 # Debug query for last values
