@@ -4,12 +4,10 @@
 
 Scripts related to Raspberry Pi temperature logger project for reading temperature values from DS18B20 sensor device and reading the data forward to Zabbix monitoring system.
 
-Read more about how these were used from [here](http://humbletux.blogspot.com/2012/12/yet-another-raspberry-pi-temperature.html).
-
 ## Status
 
 - Scripts work
-- Frontend stuff does not work yet
+- Frontend stuff does not work (yet)
 
 ## Contents
 
@@ -17,10 +15,10 @@ __data/__:
   - The database location
 
 __http/__:
-  - Frontend stuff
+  - Frontend [Yii](http://www.yiiframework.com/) stuff
 
 __scripts/w1-temp__:
-  - reads a value from the sensor and outputs it to STDOUT
+  - reads a value from the sensor and writes it to STDOUT
 
 __scripts/w1-store-temp__:
   - Creates a new SQLite database if it does not already exist
