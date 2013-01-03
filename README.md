@@ -13,6 +13,12 @@ Read more about how these were used from [here](http://humbletux.blogspot.com/20
 
 ## Contents
 
+__data/__:
+  - The database location
+
+__http/__:
+  - Frontend stuff
+
 __scripts/w1-temp__:
   - reads a value from the sensor and outputs it to STDOUT
 
@@ -20,11 +26,8 @@ __scripts/w1-store-temp__:
   - Creates a new SQLite database if it does not already exist
   - Inserts the value to the database
 
-__data/__:
-  - The database location
-
-__http/__:
-  - Frontend stuff
+__README.md__:
+  - This README
 
 ## Prerequisites
 
@@ -34,5 +37,7 @@ __http/__:
 ## Installation
 
 - Add a following lines to your crontab to store the temperature values to the database
+
     # Store temperature values to the database every 10 minutes
     */10 * * * * /opt/RPi-temperature/scripts/w1-store-temp
+
