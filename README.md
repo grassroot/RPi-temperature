@@ -38,6 +38,6 @@ __README.md__:
 
 - Add a following lines to your crontab to store the temperature values to the database
 
-    # Store temperature values to the database every 10 minutes
+    \\# Store temperature values to the database every 10 minutes
     */10 * * * * /opt/RPi-temperature/scripts/w1-store-temp
 
