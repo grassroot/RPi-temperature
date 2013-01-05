@@ -30,7 +30,7 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 //				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'Temperatures', 'url'=>array('/temperature/admin')),
+				array('label'=>'Home', 'url'=>array('/temperature/admin')),
 				array('label'=>'Locations', 'url'=>array('/location/admin')),
 //				array('label'=>'Parameters', 'url'=>array('/parameter/admin')),
 				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),

@@ -2,11 +2,6 @@
 /* @var $this TemperatureController */
 /* @var $model Temperature */
 
-$this->breadcrumbs=array(
-	'Temperatures'=>array('admin'),
-	'Manage',
-);
-
 //$this->menu=array(
 //	array('label'=>'List Temperature', 'url'=>array('index')),
 //	array('label'=>'Create Temperature', 'url'=>array('create')),

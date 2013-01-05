@@ -2,11 +2,6 @@
 /* @var $this LocationController */
 /* @var $model Location */
 
-$this->breadcrumbs=array(
-	'Locations'=>array('index'),
-	$model->id,
-);
-
 $this->menu=array(
 //	array('label'=>'List Location', 'url'=>array('index')),
 	array('label'=>'Create Location', 'url'=>array('create')),

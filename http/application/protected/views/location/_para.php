@@ -9,6 +9,8 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'parameter-form',
 	'enableAjaxValidation'=>false,
+        // Check that the action method below is correct
+        'action' => array('/parameter/update', 'id' => $model->id), 
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
