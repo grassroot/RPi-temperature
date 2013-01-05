@@ -89,6 +89,8 @@ class LocationController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+
+
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -100,6 +102,7 @@ class LocationController extends Controller
 			if($model->save())
 				$this->redirect(array('admin','id'=>$model->id));
 		}
+
 
 		$this->render('update',array(
 			'model'=>$model,
@@ -136,10 +139,24 @@ class LocationController extends Controller
 	 */
 	public function actionAdmin()
 	{
+
 		$model=new Location('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Location']))
+		{
 			$model->attributes=$_GET['Location'];
+		}
+
+		$parameter = new Parameter;
+                if(isset($_POST['Parameter']))
+                {
+                        $parameter->attributes=$_POST['Parameter'];
+                        if($parameter->save())
+			{
+echo "bar";
+                               $this->redirect(array('admin'));
+			}
+                }
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -178,8 +195,10 @@ class LocationController extends Controller
         {
                 $model=Parameter::model()->findByAttributes(array('name'=>$name));
                 if($model===null)
+		{
                         throw new CHttpException(404,'The requested page does not exist.');
-                return $model;
+		}
+                return $model->value;
         }
 
 }

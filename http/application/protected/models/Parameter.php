@@ -78,7 +78,7 @@ class Parameter extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+//		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('value',$this->value,true);
 
@@ -86,4 +86,29 @@ class Parameter extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	// Retrieve a parameter value
+        public function getParameter($name)
+        {
+//                $model=Parameter::model()->findByAttributes(array('name'=>$name));
+//                if($model===null)
+//                {
+//                        throw new CHttpException(404,'The requested page does not exist.');
+//                }
+//                return $model->value;
+
+                $criteria=new CDbCriteria;
+		$criteria->select='value'; 
+                $criteria->compare('name',$name);
+
+                $dataProvider = new CActiveDataProvider($this, array(
+                        'criteria'=>$criteria,
+                ));
+		$row = $dataProvider->getData();
+//		return $dataProvider->getData()->value;
+		return $row['id'];
+//return Yii::app()->params['adminEmail'];
+
+        }
+
 }
