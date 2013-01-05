@@ -32,6 +32,21 @@ class Temperature extends CActiveRecord
 		return 'temperature';
 	}
 
+	private $_tempLocation = null;
+	public function getTempLocation()
+	{
+	    if ($this->_tempLocation === null && $this->location !== null)
+	    {
+	        $this->_tempLocation = $this->location->location;
+	    }
+	    return $this->_tempLocation;
+	}
+	public function setTempLocation($value)
+	{
+	    $this->_tempLocation = $value;
+	}
+
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -45,7 +60,7 @@ class Temperature extends CActiveRecord
 			array('value', 'numerical'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, locationId, value, createDate', 'safe', 'on'=>'search'),
+			array('id, locationId, value, createDate, tempLocation', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,8 +84,9 @@ class Temperature extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'locationId' => 'Location',
+			'tempLocation' => 'Location',
 			'value' => 'Value',
-			'createDate' => 'Create Date',
+			'createDate' => 'Timestamp',
 		);
 	}
 
@@ -84,14 +100,29 @@ class Temperature extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+		$criteria->with = "location"; // Make sure you query with the post table.
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('locationId',$this->locationId);
 		$criteria->compare('value',$this->value);
 		$criteria->compare('createDate',$this->createDate,true);
+		$criteria->compare('location.location', $this->tempLocation,true);
+
+		$sort = new CSort();
+		$sort->defaultOrder='createDate DESC';
+		$sort->attributes = array(
+			'tempLocation'=>array(
+			        'asc'=>'location.location',
+			        'desc'=>'location.location desc',
+			),
+			'*',
+		);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>$sort
 		));
+
 	}
+
 }

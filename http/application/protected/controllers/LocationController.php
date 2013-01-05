@@ -8,13 +8,15 @@ class LocationController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
+	public $defaultAction='admin';
+
 	/**
 	 * @return array action filters
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+//			'accessControl', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
@@ -71,7 +73,8 @@ class LocationController extends Controller
 		{
 			$model->attributes=$_POST['Location'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				//$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -95,7 +98,7 @@ class LocationController extends Controller
 		{
 			$model->attributes=$_POST['Location'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('admin','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -170,4 +173,13 @@ class LocationController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+        public function getParameter($name)
+        {
+                $model=Parameter::model()->findByAttributes(array('name'=>$name));
+                if($model===null)
+                        throw new CHttpException(404,'The requested page does not exist.');
+                return $model;
+        }
+
 }

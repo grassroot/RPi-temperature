@@ -17,7 +17,8 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'locationId'); ?>
-		<?php echo $form->textField($model,'locationId'); ?>
+		<?php //echo $form->textField($model,'locationId'); ?>
+		<?php echo $form->dropDownList($model,'locationId', CHtml::listData(Location::model()->findAll(), 'id', 'location')); ?>
 		<?php echo $form->error($model,'locationId'); ?>
 	</div>
 

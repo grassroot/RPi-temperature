@@ -8,13 +8,15 @@ class TemperatureController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
+        public $defaultAction='admin';
+
 	/**
 	 * @return array action filters
 	 */
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+//			'accessControl', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}

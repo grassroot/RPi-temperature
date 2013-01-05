@@ -42,6 +42,8 @@ class Location extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, location', 'safe', 'on'=>'search'),
+			// Location is required
+			array('location', 'required'),
 		);
 	}
 

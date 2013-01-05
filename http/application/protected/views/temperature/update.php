@@ -9,9 +9,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Temperature', 'url'=>array('index')),
-	array('label'=>'Create Temperature', 'url'=>array('create')),
-	array('label'=>'View Temperature', 'url'=>array('view', 'id'=>$model->id)),
+//	array('label'=>'List Temperature', 'url'=>array('index')),
+//	array('label'=>'Create Temperature', 'url'=>array('create')),
+//	array('label'=>'View Temperature', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage Temperature', 'url'=>array('admin')),
 );
 ?>

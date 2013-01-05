@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Location', 'url'=>array('index')),
+//	array('label'=>'List Location', 'url'=>array('index')),
 	array('label'=>'Manage Location', 'url'=>array('admin')),
 );
 ?>

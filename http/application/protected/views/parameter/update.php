@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'List Parameter', 'url'=>array('index')),
-	array('label'=>'Create Parameter', 'url'=>array('create')),
+//	array('label'=>'Create Parameter', 'url'=>array('create')),
 	array('label'=>'View Parameter', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage Parameter', 'url'=>array('admin')),
 );

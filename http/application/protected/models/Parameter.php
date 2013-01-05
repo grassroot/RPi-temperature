@@ -40,6 +40,7 @@ class Parameter extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, value', 'safe', 'on'=>'search'),
+			array('name, value', 'required'),
 		);
 	}
 

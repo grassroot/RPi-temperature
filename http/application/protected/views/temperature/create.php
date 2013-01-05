@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Temperature', 'url'=>array('index')),
+//	array('label'=>'List Temperature', 'url'=>array('index')),
 	array('label'=>'Manage Temperature', 'url'=>array('admin')),
 );
 ?>

@@ -9,9 +9,9 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'List Parameter', 'url'=>array('index')),
-	array('label'=>'Create Parameter', 'url'=>array('create')),
+//	array('label'=>'Create Parameter', 'url'=>array('create')),
 	array('label'=>'Update Parameter', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Parameter', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+//	array('label'=>'Delete Parameter', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Manage Parameter', 'url'=>array('admin')),
 );
 ?>
