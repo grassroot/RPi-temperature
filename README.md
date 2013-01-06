@@ -64,11 +64,9 @@ Assumption is that you have followed my path covered [here](http://humbletux.blo
     $ sudo chgrp -R www-data data
     $ sudo chmod g+w -R www-data data
 
-- Create a new `http/application/protected/config/main.php` for the frontend by copying it from main.php.example in the sme directory.
-
 - With your favorite browser, locate to the Pi's IP-address, and you should see a home page listing the latest temperature values.
 
 - Go to Locations-page and change the current location of the Pi.
 
-Datz it :-)
+Datz it, enjoy :-)
 
