@@ -7,7 +7,7 @@ Scripts related to Raspberry Pi temperature logger project for reading temperatu
 ## Status
 
 - Scripts work
-- Frontend stuff does not work (yet)
+- Frontend stuff basically works, although there are some work (and ideas) still left.
 
 ## Contents
 
@@ -15,7 +15,7 @@ __data/__:
   - The database location
 
 __http/__:
-  - Frontend [Yii](http://www.yiiframework.com/) stuff
+  - Frontend made with [Yii](http://www.yiiframework.com/).
 
 __scripts/w1-temp__:
   - reads a value from the sensor and writes it to STDOUT
@@ -30,13 +30,39 @@ __README.md__:
 ## Prerequisites
 
 - Raspberry Pi (naturally) fixed with One Wire temperature sensor (DS18B20) to report temperature values. Read [here](http://humbletux.blogspot.com/2012/12/yet-another-raspberry-pi-temperature.html) about my setup.
-- Required packages: sqlite3
+- Required packages: `sqlite3`
 
 ## Installation
 
-- Add a following lines to your crontab to store the temperature values to the database
+Assumption is that you have followed my path covered [here](http://humbletux.blogspot.com/2012/12/yet-another-raspberry-pi-temperature.html).
+
+- Install required packages: `sudo apt-get install sqlite3 git apache2`.
+
+- Download the project
+
+    $ cd /opt
+    $ sudo mkdir RPi-temperature
+    $ sudo chown pi:pi RPi-temperature
+    $ git clone git://github.com/grassroot/RPi-temperature.git
+    
+- Change Apache's default webroot to point into application directory by modifying file `/etc/apache2/sites-available/default`:
+    - Modify `DocumentRoot /var/www` to `DocumentRoot /opt/RPi-temperature/http/application`.
+    - Modify `<Directory /var/www>` to `<Directory /opt/RPi-temperature/http/application>`.
+    - Reload the apache configuration: `sudo /etc/init.d/apache2 reload`.
+
+- Add a following lines to your crontab to store the temperature values to the database. The script will create the database under data/ at first run.
 <pre>
     # Store temperature values to the database every 10 minutes
     */10 * * * * /opt/RPi-temperature/scripts/w1-store-temp
 </pre>
+
+- Run the store-script manually to initialize the database and make sure it works.
+
+- Modify the database file and directory for Apache to be able to access it properly.
+
+    $ cd /opt/RPi-temperature
+    $ sudo chgrp -R www-data data
+    $ sudo chmod g+w -R www-data data
+
+- Create a new `http/application/protected/config/main.php` for the frontend by copying it from main.php.example in the sme directory.
 
