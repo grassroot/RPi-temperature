@@ -27,23 +27,20 @@ __scripts/w1-store-temp__:
 __README.md__:
   - This README
 
-## Prerequisites
-
-- Raspberry Pi (naturally) fixed with One Wire temperature sensor (DS18B20) to report temperature values. Read [here](http://humbletux.blogspot.com/2012/12/yet-another-raspberry-pi-temperature.html) about my setup.
-- Required packages: `sqlite3`
-
 ## Installation
 
-Assumption is that you have followed my path covered [here](http://humbletux.blogspot.com/2012/12/yet-another-raspberry-pi-temperature.html).
+Assumption is that you have the Raspberry Pi (naturally) fixed with One Wire temperature sensor (DS18B20) to report temperature values. Read [here](http://humbletux.blogspot.com/2012/12/yet-another-raspberry-pi-temperature.html) about my setup.
 
 - Install required packages: `sudo apt-get install sqlite3 git apache2`.
 
 - Download the project
 
+<pre>
     $ cd /opt
     $ sudo mkdir RPi-temperature
     $ sudo chown pi:pi RPi-temperature
     $ git clone git://github.com/grassroot/RPi-temperature.git
+</pre>
     
 - Change Apache's default webroot to point into application directory by modifying file `/etc/apache2/sites-available/default`:
     - Modify `DocumentRoot /var/www` to `DocumentRoot /opt/RPi-temperature/http/application`.
@@ -59,10 +56,11 @@ Assumption is that you have followed my path covered [here](http://humbletux.blo
 - Run the store-script manually to initialize the database and make sure it works.
 
 - Modify the database file and directory for Apache to be able to access it properly.
-
+<pre>
     $ cd /opt/RPi-temperature
     $ sudo chgrp -R www-data data
     $ sudo chmod g+w -R www-data data
+</pre>
 
 - With your favorite browser, locate to the Pi's IP-address, and you should see a home page listing the latest temperature values.
 
