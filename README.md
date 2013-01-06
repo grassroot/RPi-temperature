@@ -34,7 +34,6 @@ Assumption is that you have the Raspberry Pi (naturally) fixed with One Wire tem
 - Install required packages: `sudo apt-get install sqlite3 git apache2`.
 
 - Download the project
-
 <pre>
     $ cd /opt
     $ sudo mkdir RPi-temperature
@@ -62,7 +61,7 @@ Assumption is that you have the Raspberry Pi (naturally) fixed with One Wire tem
     $ sudo chmod g+w -R www-data data
 </pre>
 
-- With your favorite browser, locate to the Pi's IP-address, and you should see a home page listing the latest temperature values.
+- With your favourite browser, locate to the Pi's IP-address, and you should see a home page listing the latest temperature values.
 
 - Go to Locations-page and change the current location of the Pi.
 
