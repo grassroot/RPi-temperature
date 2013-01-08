@@ -140,9 +140,38 @@ class TemperatureController extends Controller
 		if(isset($_GET['Temperature']))
 			$model->attributes=$_GET['Temperature'];
 
-		$this->render('admin',array(
+///
+        $criteria=new CDbCriteria;
+        $criteria->addCondition('createDate > datetime(\'now\', \'-1 hour\', \'localtime\')');
+
+        $dataProvider=new CActiveDataProvider('Temperature',
+            array(
+                'criteria'=>$criteria,
+            )
+        );
+
+ //       //json formatted ajax response to request
+ //       if(isset($_GET['json']) && $_GET['json'] == 1){
+ //           $count = Temperature::model()->count();
+ //           for($i=1; $i<=$count; $i++){
+ //               $data = Temperature::model()->findByPk($i);
+ //               $data->data += rand(-10,10);
+ //               $data->save();
+ //           }
+ //           echo CJSON::encode($dataProvider->getData());
+ //       }else{
+            $this->render('admin',array(
+                    'dataProvider'=>$dataProvider,
 			'model'=>$model,
-		));
+            ));
+//        }
+///
+
+//		$this->render('admin',array(
+//			'model'=>$model,
+//                    'dataProvider'=>$dataProvider,
+//		));
+
 	}
 
 	/**
@@ -172,4 +201,35 @@ class TemperatureController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+    /**
+    * a combine view of highcharts
+    */
+    public function actionChartView()
+    {
+ 
+        $criteria=new CDbCriteria;
+        $dataProvider=new CActiveDataProvider('Temperature',
+            array(
+                'criteria'=>$criteria,
+            )
+        );
+ 
+        //json formatted ajax response to request
+        if(isset($_GET['json']) && $_GET['json'] == 1){
+            $count = Temperature::model()->count();
+            for($i=1; $i<=$count; $i++){
+                $data = Temperature::model()->findByPk($i);
+                $data->data += rand(-10,10);
+                $data->save();
+            }
+            echo CJSON::encode($dataProvider->getData());
+        }else{
+            $this->render('admin',array(
+                    'dataProvider'=>$dataProvider,
+            ));
+        }
+ 
+    }
+
 }

@@ -48,6 +48,32 @@ $('.search-form form').submit(function(){
 )); ?>
 <p>
 You may also use comparison operators (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
- 57 or <b>=</b>) at the beginning of each value to filter results.
+or <b>=</b>) at the beginning of each value to filter results.
 </p>
+
+<h2>Chart test</h2>
+<?php 
+$this->Widget('ext.ActiveHighcharts.HighchartsWidget', array(
+        'dataProvider'=>$dataProvider,
+        'template'=>'{items}',
+        'options'=> array(
+            'title'=>array(
+                'text'=>'Temperatures'
+            ),
+		'exporting' => array('enabled' => false),
+            'xAxis'=>array(
+                // It cant be 1.a self-defined xAxis array as you want; 
+                // 2.a series from datebase such as time series
+                "categories"=>'createDate'            
+            ),
+            'series'=>array(
+                array(
+//                    'type'=>'areaspline',
+                    'name'=>'Values',             //title of data
+                    'dataResource'=>'value',     //data resource according to datebase column
+                )
+            )
+        )
+    ));
+?>
 

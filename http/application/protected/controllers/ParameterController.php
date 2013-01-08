@@ -95,7 +95,7 @@ class ParameterController extends Controller
 		{
 			$model->attributes=$_POST['Parameter'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('location/admin'));
 		}
 
 		$this->render('update',array(

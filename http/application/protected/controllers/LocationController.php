@@ -147,16 +147,19 @@ class LocationController extends Controller
 			$model->attributes=$_GET['Location'];
 		}
 
-		$parameter = new Parameter;
-                if(isset($_POST['Parameter']))
-                {
-                        $parameter->attributes=$_POST['Parameter'];
-                        if($parameter->save())
-			{
-echo "bar";
-                               $this->redirect(array('admin'));
-			}
-                }
+//		$parameter = new Parameter;
+//echo "foo1";
+//                if(isset($_POST['Parameter']))
+//                {
+//echo "foo2";
+//                        $parameter->attributes=$_POST['Parameter'];
+//echo "foo";
+//                        if($parameter->save())
+//			{
+//echo "bar";
+//                               $this->redirect(array('admin'));
+//			}
+//                }
 
 		$this->render('admin',array(
 			'model'=>$model,
