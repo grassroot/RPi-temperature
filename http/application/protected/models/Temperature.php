@@ -125,4 +125,17 @@ class Temperature extends CActiveRecord
 
 	}
 
+        public function listforgraph()
+        {
+
+                $criteria=new CDbCriteria;
+		$criteria->select = 'id, value';
+	        $criteria->addCondition('createDate > datetime(\'now\', \'-1 hour\', \'localtime\')');
+
+                return new CActiveDataProvider($this, array(
+                        'criteria'=>$criteria,
+                ));
+
+        }
+
 }

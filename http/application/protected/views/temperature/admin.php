@@ -23,8 +23,6 @@ $('.search-form form').submit(function(){
 
 <h2>Manage Temperatures</h2>
 
-<?php //echo Yii::app()->AppParams->CURRENT_LOCATION; ?>
-
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
@@ -53,6 +51,7 @@ or <b>=</b>) at the beginning of each value to filter results.
 
 <h2>Chart test</h2>
 <?php 
+/*
 $this->Widget('ext.ActiveHighcharts.HighchartsWidget', array(
         'dataProvider'=>$dataProvider,
         'template'=>'{items}',
@@ -75,5 +74,115 @@ $this->Widget('ext.ActiveHighcharts.HighchartsWidget', array(
             )
         )
     ));
+$this->Widget('ext.highcharts.HighchartsWidget', array(
+   'options'=>array(
+      'title' => array('text' => 'Fruit Consumption'),
+      'xAxis' => array(
+         'categories' => array('Apples', 'Bananas', 'Oranges')
+      ),
+      'yAxis' => array(
+         'title' => array('text' => 'Fruit eaten')
+      ),
+      'series' => array(
+         array('name' => 'Jane', 'data' => array(1, 0, 4)),
+         array('name' => 'John', 'data' => array(5, 7, 3))
+      )
+   )
+));
+$this->Widget('ext.highcharts.HighchartsWidget', array(
+   'options'=>'{
+      "title": { "text": "Fruit Consumption" },
+"theme" => "gray",
+      "xAxis": {
+         "categories": ["Apples", "Bananas", "Oranges"]
+      },
+      "yAxis": {
+         "title": { "text": "Fruit eaten" }
+      },
+      "series": [
+         { "name": "Jane", "color": "black", "data": [1, 0, 4] },
+         { "name": "John", "color": "red", "data": [5, 7,3] }
+      ]
+   }'
+));
+*/
+
+$arr = Yii::app()->db->createCommand('SELECT id, value FROM temperature where createDate > datetime(\'now\', \'-1 hour\', \'localtime\')')->queryAll(); 
+$dataProvider=new CArrayDataProvider($arr, array(
+                                'keyField' => 'id'
+                ));
+
+
+//$arr = Yii::app()->db->createCommand('SELECT id, value FROM temperature')->queryAll(); 
+
+//$arr = array();
+//foreach($temps as $t)
+//{
+//    $arr[$t->id] = $t->id;
+//    $arr[$t->id] = '1';
+//}
+
+//$dP=new CActiveDataProvider('Temperature');
+
+/*
+$this->widget('application.extensions.EFlot.EFlotGraphWidget', 
+    array(
+        'data'=>array(
+            array(
+                'label'=> 'line', 
+               'data'=>array(
+                    array(1,1),
+                    array(2,7),
+                    array(3,12),
+                    array(4,32),
+                    array(5,62),
+                    array(6,9),
+                ),
+//		'data'=>$arr,
+		'data'=>$model->listforgraph(),
+                'lines'=>array('show'=>true),
+                'points'=>array('show'=>true),
+            ),
+        ),
+        'options'=>array(
+                'legend'=>array(
+                    'position'=>'nw',
+                    'show'=>false,
+                    'margin'=>10,
+                    'backgroundOpacity'=> 0.5
+                    ),
+        ),
+        'htmlOptions'=>array(
+               'style'=>'width:800px;height:400px;'
+        )
+    )
+);
+*/
+    $this->widget('application.extensions.amcharts.EAmChartWidget', 
+                    array(
+                        'width' => 700, // width of the Chart
+                        'height' => 400, // height of the chart
+                        'chart'=>array(// collections of grpah to display into the chart
+                                    'dataProvider'=>$dataProvider, // DataProvider
+                                    'categoryField' => 'createDate' // Field of the DataProvider to set on the X Axis
+                                    ),
+                        'graphs'=>array(
+                                array(
+                                    'valueField' => 'value',
+                                    'title'=>'Value',
+                                    'type' => 'line',
+                                    'fillColors'=>'Transparent',
+                                    'fillAlphas'=>'0',
+                                    'lineColor'=>'#EE2299',
+                                    'bullet'=>'round'
+                                )),
+                        'categoryAxis'=>array(
+                                    'title'=>'Species Name'
+                                    ),
+                        'valueAxis'=>array(
+                                    'title'=>'Identifier')
+    )); 
+
 ?>
+
 

@@ -140,6 +140,19 @@ class TemperatureController extends Controller
 		if(isset($_GET['Temperature']))
 			$model->attributes=$_GET['Temperature'];
 
+                $graph=new Temperature('listforgraph');
+                $graph->unsetAttributes();  // clear any default values
+                if(isset($_GET['Temperature']))
+                        $model->attributes=$_GET['Temperature'];
+
+//
+            $this->render('admin',array(
+                    'graph'=>$graph,
+                        'model'=>$model,
+            ));
+
+/*
+
 ///
         $criteria=new CDbCriteria;
         $criteria->addCondition('createDate > datetime(\'now\', \'-1 hour\', \'localtime\')');
@@ -171,6 +184,7 @@ class TemperatureController extends Controller
 //			'model'=>$model,
 //                    'dataProvider'=>$dataProvider,
 //		));
+*/
 
 	}
 
